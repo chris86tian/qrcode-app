@@ -16,12 +16,23 @@
      crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Updated Header Structure -->
     <header>
         <div class="site-title">K1Q.de</div>
-        <!-- SEO: H1 angepasst -->
-        <h1>QR-Code Generator mit Logo</h1>
-        <!-- SEO: Untertitel angepasst -->
-        <p>Erstellen Sie individuelle QR-Codes mit Logo und Farben – für URLs, Kontakte, WLAN & mehr</p>
+        <div class="header-text">
+            <!-- SEO: H1 angepasst -->
+            <h1>QR-Code Generator mit Logo</h1>
+            <!-- SEO: Untertitel angepasst -->
+            <p>Erstellen Sie individuelle QR-Codes mit Logo und Farben – für URLs, Kontakte, WLAN & mehr</p>
+        </div>
+        <div class="header-auth">
+            <!-- Placeholder for Login/Register links -->
+            <a href="/login">Anmelden</a>
+            <a href="/register">Registrieren</a>
+            <!-- Logged-in state example (to be implemented) -->
+            <!-- <a href="/dashboard">Meine Codes</a> -->
+            <!-- <a href="/logout">Abmelden</a> -->
+        </div>
     </header>
 
     <!-- Google AdSense Banner oben - AKTUALISIERT -->
@@ -63,6 +74,16 @@
                 <p style="text-align: center; color: #6c757d; margin-top: 15px;">Bitte wähle einen Inhaltstyp aus.</p>
             </div>
 
+            <!-- Fields for logged-in users (to be shown conditionally) -->
+            <div id="save-options" style="display: none;"> <!-- Initially hidden -->
+                 <div class="form-group">
+                    <label for="qr_name">Name / Beschreibung (optional):</label>
+                    <input type="text" name="qr_name" id="qr_name" placeholder="z.B. Link zu meiner Webseite">
+                </div>
+            </div>
+            <!-- End fields for logged-in users -->
+
+
             <div class="form-group options-group">
                 <div>
                     <label for="darkColor">Farbe (Punkte):</label>
@@ -81,6 +102,8 @@
             </div>
 
             <button type="submit">QR-Code generieren</button>
+            <!-- Save button for logged-in users (to be shown conditionally) -->
+            <button type="submit" id="save-qr-button" style="display: none; background: #6c757d;">QR-Code generieren & speichern</button>
         </form>
 
         <div id="qr-code-result" style="margin-top: 30px; text-align: center;">
