@@ -6,7 +6,7 @@
     <!-- SEO: Optimierter Title -->
     <title>QR-Code Generator mit Logo & Farben | K1Q.de</title>
     <!-- SEO: Meta Description hinzugefügt -->
-    <meta name="description" content="Erstellen Sie individuelle QR-Codes mit Ihrem Logo und benutzerdefinierten Farben. Einfach, schnell und kostenlos mit dem QR-Code Generator von K1Q.de. Unterstützt URL, Kontakt, WLAN, Text, E-Mail, SMS, WhatsApp, Spotify und YouTube.">
+    <meta name="description" content="Erstellen Sie individuelle QR-Codes mit Ihrem Logo und benutzerdefinierten Farben. Einfach, schnell und kostenlos mit dem QR-Code Generator von K1Q.de. Unterstützt URL, Kontakt, WLAN, Text, E-Mail, SMS, WhatsApp, Spotify, YouTube und Bewertungen.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,20 +18,17 @@
 <body>
     <!-- Updated Header Structure -->
     <header>
-        <div class="site-title">K1Q.de</div>
+        <div class="site-title"><a href="/">K1Q.de</a></div>
         <div class="header-text">
             <!-- SEO: H1 angepasst -->
             <h1>QR-Code Generator mit Logo</h1>
             <!-- SEO: Untertitel angepasst -->
             <p>Erstellen Sie individuelle QR-Codes mit Logo und Farben – für URLs, Kontakte, WLAN & mehr</p>
         </div>
-        <div class="header-auth">
-            <!-- Placeholder for Login/Register links -->
+        <div class="header-auth" id="auth-links">
+            <!-- Links will be dynamically updated by JS -->
             <a href="/login">Anmelden</a>
             <a href="/register">Registrieren</a>
-            <!-- Logged-in state example (to be implemented) -->
-            <!-- <a href="/dashboard">Meine Codes</a> -->
-            <!-- <a href="/logout">Abmelden</a> -->
         </div>
     </header>
 
@@ -66,6 +63,7 @@
                     <button type="button" class="content-type-btn" data-value="whatsapp">WhatsApp</button>
                     <button type="button" class="content-type-btn" data-value="spotify">Spotify</button>
                     <button type="button" class="content-type-btn" data-value="youtube">YouTube</button>
+                    <button type="button" class="content-type-btn" data-value="review">Bewertung</button> <!-- NEU -->
                 </div>
                 <input type="hidden" name="content_type" id="content_type" value="">
             </div>
@@ -74,11 +72,12 @@
                 <p style="text-align: center; color: #6c757d; margin-top: 15px;">Bitte wähle einen Inhaltstyp aus.</p>
             </div>
 
-            <!-- Fields for logged-in users (to be shown conditionally) -->
-            <div id="save-options" style="display: none;"> <!-- Initially hidden -->
+            <!-- Fields for logged-in users (shown/hidden by JS) -->
+            <div id="save-options" style="display: none;">
                  <div class="form-group">
-                    <label for="qr_name">Name / Beschreibung (optional):</label>
+                    <label for="qr_name">Name / Beschreibung (zum Speichern):</label>
                     <input type="text" name="qr_name" id="qr_name" placeholder="z.B. Link zu meiner Webseite">
+                    <small>Lassen Sie dieses Feld leer, um den QR-Code nicht zu speichern.</small>
                 </div>
             </div>
             <!-- End fields for logged-in users -->
@@ -97,13 +96,12 @@
                     <!-- SEO: Alt-Text implizit durch Label -->
                     <label for="logo">Logo (optional, max. 2MB):</label>
                     <input type="file" name="logo" id="logo" accept=".png, .jpg, .jpeg, .svg">
-                    <small>Wird mittig platziert.</small> <!-- Hinweis angepasst -->
+                    <small>Wird mittig platziert.</small>
                 </div>
             </div>
 
-            <button type="submit">QR-Code generieren</button>
-            <!-- Save button for logged-in users (to be shown conditionally) -->
-            <button type="submit" id="save-qr-button" style="display: none; background: #6c757d;">QR-Code generieren & speichern</button>
+            <button type="submit" id="generate-button">QR-Code generieren</button>
+            <!-- Save button text changes dynamically if logged in and name is provided -->
         </form>
 
         <div id="qr-code-result" style="margin-top: 30px; text-align: center;">
@@ -152,6 +150,10 @@
                 <h3 class="description-title">YouTube</h3>
                 <p class="description-text">Leiten Sie Nutzer direkt zu einem YouTube-Video, einem Kanal oder einer Playlist weiter.</p>
             </div>
+             <div class="description-item">
+                <h3 class="description-title">Bewertung</h3> {/* NEU */}
+                <p class="description-text">Verlinken Sie direkt zu einer Bewertungsseite, z.B. Ihrem Google Unternehmensprofil, um Kundenfeedback zu sammeln.</p>
+            </div>
         </div>
     </section>
     <!-- End Content Type Descriptions Section -->
@@ -183,7 +185,7 @@
 
         <details class="faq-item">
             <summary class="faq-question">Wie erstelle ich einen QR-Code mit Logo?</summary>
-            <p class="faq-answer">Wählen Sie den gewünschten Inhaltstyp (z.B. URL), geben Sie die Daten ein und laden Sie Ihr Logo über das "Logo"-Feld hoch. Unser Generator fügt das Logo automatisch in die Mitte des QR-Codes ein. Achten Sie darauf, dass das Logo nicht zu groß ist, um die Lesbarkeit nicht zu beeinträchtigen.</p> <!-- FAQ angepasst -->
+            <p class="faq-answer">Wählen Sie den gewünschten Inhaltstyp (z.B. URL), geben Sie die Daten ein und laden Sie Ihr Logo über das "Logo"-Feld hoch. Unser Generator fügt das Logo automatisch in die Mitte des QR-Codes ein. Achten Sie darauf, dass das Logo nicht zu groß ist, um die Lesbarkeit nicht zu beeinträchtigen.</p>
         </details>
 
         <details class="faq-item">
@@ -198,7 +200,12 @@
 
         <details class="faq-item">
             <summary class="faq-question">Ist die Nutzung des QR-Code Generators kostenlos?</summary>
-            <p class="faq-answer">Ja, die Erstellung von QR-Codes mit unserem Generator, einschließlich der Optionen für Logo und Farben, ist komplett kostenlos.</p> <!-- FAQ angepasst -->
+            <p class="faq-answer">Ja, die Erstellung von QR-Codes mit unserem Generator, einschließlich der Optionen für Logo und Farben, ist komplett kostenlos. Für erweiterte Funktionen wie das Speichern und Verwalten von QR-Codes ist eine kostenlose Registrierung erforderlich.</p> <!-- FAQ angepasst -->
+        </details>
+
+         <details class="faq-item">
+            <summary class="faq-question">Wie kann ich meine erstellten QR-Codes speichern?</summary>
+            <p class="faq-answer">Registrieren Sie sich kostenlos oder melden Sie sich an. Wenn Sie angemeldet sind, erscheint ein zusätzliches Feld "Name / Beschreibung". Geben Sie dort einen Namen für Ihren QR-Code ein, bevor Sie auf "QR-Code generieren" klicken. Der Code wird dann automatisch in Ihrem Dashboard gespeichert.</p> <!-- NEU -->
         </details>
 
         <details class="faq-item">
@@ -208,7 +215,7 @@
 
         <details class="faq-item">
             <summary class="faq-question">Kann das Aussehen des QR-Codes (z.B. runde Ecken) geändert werden?</summary>
-            <p class="faq-answer">Aktuell unterstützt unser Generator die Anpassung der Farben und das Hinzufügen eines Logos. Eine Änderung der Form der QR-Code-Punkte (z.B. abgerundet) ist derzeit nicht möglich.</p> <!-- FAQ angepasst -->
+            <p class="faq-answer">Aktuell unterstützt unser Generator die Anpassung der Farben und das Hinzufügen eines Logos. Eine Änderung der Form der QR-Code-Punkte (z.B. abgerundet) ist derzeit nicht möglich.</p>
         </details>
     </section>
     <!-- End FAQ Section -->
@@ -234,7 +241,59 @@
         <p>&copy; 2025 K1Q.de QR-Code Generator</p>
     </footer>
 
-    <script src="adsense.js"></script> <!-- Beachte: Diese Datei existiert aktuell nicht -->
+    <!-- adsense.js might need adjustments if elements it targets aren't present -->
+    <!-- <script src="adsense.js"></script> -->
     <script src="js/main.js" defer></script>
+    <script>
+        // Check login status and update UI elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const authLinksDiv = document.getElementById('auth-links');
+            const saveOptionsDiv = document.getElementById('save-options');
+            const qrNameInput = document.getElementById('qr_name');
+            const generateButton = document.getElementById('generate-button');
+
+            // Simple check: Assume logged in if a session cookie exists (not foolproof security)
+            // A better way is an API call to check session status, but this is simpler for now.
+            // Or check if redirected from login/register success.
+            // For a robust check, make a fetch request to a '/api/user/status' endpoint.
+            // Let's try a fetch approach:
+            fetch('/api/my-qrcodes', { method: 'HEAD' }) // Use HEAD request to check auth without getting data
+                .then(response => {
+                    if (response.ok) { // Status 200-299 means likely logged in
+                        console.log("User is logged in.");
+                        authLinksDiv.innerHTML = `
+                            <a href="/dashboard">Meine Codes</a>
+                            <a href="/logout">Abmelden</a>
+                        `;
+                        saveOptionsDiv.style.display = 'block'; // Show save options
+
+                        // Change button text based on name input
+                        qrNameInput.addEventListener('input', () => {
+                            if (qrNameInput.value.trim() !== '') {
+                                generateButton.textContent = 'QR-Code generieren & speichern';
+                                generateButton.style.background = '#28a745'; // Green for save
+                            } else {
+                                generateButton.textContent = 'QR-Code generieren';
+                                generateButton.style.background = ''; // Reset to default
+                            }
+                        });
+
+                    } else {
+                        console.log("User is not logged in.");
+                        // Keep default links (Anmelden/Registrieren)
+                        saveOptionsDiv.style.display = 'none'; // Hide save options
+                        generateButton.textContent = 'QR-Code generieren'; // Ensure default text
+                         generateButton.style.background = ''; // Reset to default
+                    }
+                })
+                .catch(error => {
+                    console.error("Error checking login status:", error);
+                    // Assume not logged in on error
+                     saveOptionsDiv.style.display = 'none';
+                     generateButton.textContent = 'QR-Code generieren';
+                     generateButton.style.background = '';
+                });
+        });
+    </script>
 </body>
 </html>

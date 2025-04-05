@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmelden - K1Q.de QR-Code Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Add specific styles for login page if needed */
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .auth-container h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .auth-container .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .auth-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        .auth-container input[type="email"],
+        .auth-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .auth-container button[type="submit"],
+        .auth-container .google-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .auth-container button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+        }
+        .auth-container button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .auth-container .google-btn {
+            background-color: #db4437;
+            color: white;
+            text-decoration: none; /* For anchor tag */
+            display: inline-block; /* For anchor tag */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .auth-container .google-btn:hover {
+            background-color: #c33d2e;
+        }
+        .auth-container .separator {
+            margin: 20px 0;
+            border-bottom: 1px solid #eee;
+            line-height: 0.1em;
+            text-align: center;
+        }
+        .auth-container .separator span {
+            background: #fff;
+            padding: 0 10px;
+            color: #aaa;
+        }
+        .auth-container .switch-auth {
+            margin-top: 20px;
+            color: #555;
+        }
+        .auth-container .switch-auth a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .auth-container .switch-auth a:hover {
+            text-decoration: underline;
+        }
+        .error-message, .success-message {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .success-message {
+             color: #155724;
+             background-color: #d4edda;
+             border-color: #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-title"><a href="/">K1Q.de</a></div>
+        <div class="header-text">
+            <h1>Anmelden</h1>
+        </div>
+         <div class="header-auth">
+            <!-- Links shown when not logged in -->
+            <a href="/login">Anmelden</a>
+            <a href="/register">Registrieren</a>
+        </div>
+    </header>
+
+    <main class="auth-container">
+        <h1>Beim QR-Code Generator anmelden</h1>
+
+        <!-- Display Login Errors -->
+        <div id="error-messages"></div>
+        <!-- Display Registration Success -->
+        <div id="success-messages"></div>
+
+
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Anmelden</button>
+        </form>
+
+        <div class="separator"><span>ODER</span></div>
+
+        <a href="/auth/google" class="google-btn">Mit Google anmelden</a>
+
+        <p class="switch-auth">
+            Noch kein Konto? <a href="/register">Jetzt registrieren</a>
+        </p>
+    </main>
+
+    <footer>
+        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a> | <a href="blog-qr-code-mit-logo.html">Blog</a>
+        <p>&copy; 2025 K1Q.de QR-Code Generator</p>
+    </footer>
+
+    <script>
+        // Simple script to display messages from URL parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const errorMessagesDiv = document.getElementById('error-messages');
+            const successMessagesDiv = document.getElementById('success-messages');
+
+            // Display login errors
+            if (params.has('error')) {
+                let errorMessage = 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.';
+                if (params.get('error') === 'google') {
+                    errorMessage = 'Anmeldung mit Google fehlgeschlagen.';
+                }
+                 if (params.get('error') === '1') { // Generic failure from passport
+                    errorMessage = 'Ungültige E-Mail oder Passwort.';
+                }
+                errorMessagesDiv.innerHTML = `<div class="error-message">${errorMessage}</div>`;
+            }
+
+            // Display registration success message
+            if (params.has('registered')) {
+                 successMessagesDiv.innerHTML = `<div class="success-message">Registrierung erfolgreich! Sie können sich jetzt anmelden.</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
