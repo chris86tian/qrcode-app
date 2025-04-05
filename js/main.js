@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const qrCodeResultDiv = document.getElementById('qr-code-result');
     const darkColorInput = document.getElementById('darkColor');
     const lightColorInput = document.getElementById('lightColor');
+    const logoInput = document.getElementById('logo'); // Get logo input
 
     const fieldTemplates = {
         url: `
@@ -128,6 +129,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="whatsapp_message">Nachricht (optional):</label>
                 <textarea name="whatsapp_message" id="whatsapp_message" rows="3"></textarea>
             </div>
+        `,
+        spotify: `
+            <div class="form-group">
+                <label for="spotify_url">Spotify URL:</label>
+                <input type="url" name="spotify_url" id="spotify_url" placeholder="https://open.spotify.com/track/..." required>
+                <small>Link zu Song, Album, Playlist oder Künstler.</small>
+            </div>
+        `,
+        youtube: `
+            <div class="form-group">
+                <label for="youtube_url">YouTube URL:</label>
+                <input type="url" name="youtube_url" id="youtube_url" placeholder="https://www.youtube.com/watch?v=..." required>
+                 <small>Link zu Video, Kanal oder Playlist.</small>
+            </div>
         `
     };
 
@@ -164,10 +179,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formData = new FormData(qrForm);
 
+        // Check if logo file input is empty and remove it from formData if so
+        // This prevents sending an empty file part, which might confuse the backend
+        if (logoInput.files.length === 0 || !logoInput.files[0].name) {
+            formData.delete('logo');
+        }
+
+
         try {
             const response = await fetch('/generate', {
                 method: 'POST',
                 body: formData
+                // Headers are not explicitly set for FormData; browser handles it
             });
 
             if (!response.ok) {
@@ -182,10 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.qrCodeUrl) {
-                // SEO: Added descriptive alt text
+                const hasUserLogo = logoInput.files.length > 0 && logoInput.files[0].name;
+                // Adjusted alt text: Removed mention of standard icon
+                const logoAltText = hasUserLogo ? "mit benutzerdefiniertem Logo" : "";
+                // SEO: Added descriptive alt text including logo info (if present)
                 qrCodeResultDiv.innerHTML = `
                     <h2>Dein QR-Code:</h2>
-                    <img src="${result.qrCodeUrl}" alt="Generierter QR-Code für ${contentTypeHiddenInput.value}" style="background-color: ${lightColorInput.value};">
+                    <img src="${result.qrCodeUrl}" alt="Generierter QR-Code für ${contentTypeHiddenInput.value} ${logoAltText}".trim() style="background-color: ${lightColorInput.value};">
                     <br>
                     <a href="${result.qrCodeUrl}" download="qr-code-${contentTypeHiddenInput.value}.png" class="download-button">
                         Download PNG

@@ -6,7 +6,7 @@
     <!-- SEO: Optimierter Title -->
     <title>QR-Code Generator mit Logo & Farben | K1Q.de</title>
     <!-- SEO: Meta Description hinzugefügt -->
-    <meta name="description" content="Erstellen Sie individuelle QR-Codes mit Ihrem Logo und benutzerdefinierten Farben. Einfach, schnell und kostenlos mit dem QR-Code Generator von K1Q.de. Unterstützt URL, Kontakt, WLAN, Text, E-Mail, SMS und WhatsApp.">
+    <meta name="description" content="Erstellen Sie individuelle QR-Codes mit Ihrem Logo und benutzerdefinierten Farben. Einfach, schnell und kostenlos mit dem QR-Code Generator von K1Q.de. Unterstützt URL, Kontakt, WLAN, Text, E-Mail, SMS, WhatsApp, Spotify und YouTube.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -53,6 +53,8 @@
                     <button type="button" class="content-type-btn" data-value="email">E-Mail</button>
                     <button type="button" class="content-type-btn" data-value="sms">SMS</button>
                     <button type="button" class="content-type-btn" data-value="whatsapp">WhatsApp</button>
+                    <button type="button" class="content-type-btn" data-value="spotify">Spotify</button>
+                    <button type="button" class="content-type-btn" data-value="youtube">YouTube</button>
                 </div>
                 <input type="hidden" name="content_type" id="content_type" value="">
             </div>
@@ -74,7 +76,7 @@
                     <!-- SEO: Alt-Text implizit durch Label -->
                     <label for="logo">Logo (optional, max. 2MB):</label>
                     <input type="file" name="logo" id="logo" accept=".png, .jpg, .jpeg, .svg">
-                    <small>Wird mittig platziert.</small>
+                    <small>Wird mittig platziert.</small> <!-- Hinweis angepasst -->
                 </div>
             </div>
 
@@ -119,6 +121,14 @@
                 <h3 class="description-title">WhatsApp</h3>
                 <p class="description-text">Startet einen WhatsApp-Chat mit einer vordefinierten Telefonnummer und optional einer vorgefertigten Nachricht.</p>
             </div>
+             <div class="description-item">
+                <h3 class="description-title">Spotify</h3>
+                <p class="description-text">Verlinken Sie direkt zu einem Song, Album, einer Playlist oder einem Künstlerprofil auf Spotify.</p>
+            </div>
+            <div class="description-item">
+                <h3 class="description-title">YouTube</h3>
+                <p class="description-text">Leiten Sie Nutzer direkt zu einem YouTube-Video, einem Kanal oder einer Playlist weiter.</p>
+            </div>
         </div>
     </section>
     <!-- End Content Type Descriptions Section -->
@@ -150,7 +160,7 @@
 
         <details class="faq-item">
             <summary class="faq-question">Wie erstelle ich einen QR-Code mit Logo?</summary>
-            <p class="faq-answer">Wählen Sie den gewünschten Inhaltstyp (z.B. URL), geben Sie die Daten ein und laden Sie Ihr Logo über das "Logo"-Feld hoch. Unser Generator fügt das Logo automatisch in die Mitte des QR-Codes ein. Achten Sie darauf, dass das Logo nicht zu groß ist, um die Lesbarkeit nicht zu beeinträchtigen.</p>
+            <p class="faq-answer">Wählen Sie den gewünschten Inhaltstyp (z.B. URL), geben Sie die Daten ein und laden Sie Ihr Logo über das "Logo"-Feld hoch. Unser Generator fügt das Logo automatisch in die Mitte des QR-Codes ein. Achten Sie darauf, dass das Logo nicht zu groß ist, um die Lesbarkeit nicht zu beeinträchtigen.</p> <!-- FAQ angepasst -->
         </details>
 
         <details class="faq-item">
@@ -165,12 +175,17 @@
 
         <details class="faq-item">
             <summary class="faq-question">Ist die Nutzung des QR-Code Generators kostenlos?</summary>
-            <p class="faq-answer">Ja, die Erstellung von QR-Codes mit unserem Generator, einschließlich der Optionen für Logo und Farben, ist komplett kostenlos.</p>
+            <p class="faq-answer">Ja, die Erstellung von QR-Codes mit unserem Generator, einschließlich der Optionen für Logo und Farben, ist komplett kostenlos.</p> <!-- FAQ angepasst -->
         </details>
 
         <details class="faq-item">
             <summary class="faq-question">Bleiben die generierten QR-Codes für immer gültig?</summary>
             <p class="faq-answer">Ja, die generierten QR-Codes selbst haben kein Ablaufdatum. Sie funktionieren so lange, wie die darin enthaltenen Informationen (z.B. der Link) gültig und erreichbar sind.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary class="faq-question">Kann das Aussehen des QR-Codes (z.B. runde Ecken) geändert werden?</summary>
+            <p class="faq-answer">Aktuell unterstützt unser Generator die Anpassung der Farben und das Hinzufügen eines Logos. Eine Änderung der Form der QR-Code-Punkte (z.B. abgerundet) ist derzeit nicht möglich.</p> <!-- FAQ angepasst -->
         </details>
     </section>
     <!-- End FAQ Section -->
