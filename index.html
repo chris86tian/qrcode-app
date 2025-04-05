@@ -1,16 +1,88 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QR Code Generator - Create Professional QR Codes</title>
-    <meta name="description" content="Create professional QR codes for your business needs. Generate QR codes for URLs, contact information, and WiFi networks." />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0494411758250043"
-     crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR-Code Generator mit Logo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google AdSense -->
+    <script data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body>
+    <header>
+        <h1>QR-Code Generator</h1>
+        <p>Erstelle QR-Codes mit deinem Logo</p>
+    </header>
+
+    <!-- Google AdSense Banner oben -->
+    <div class="adsense-banner adsense-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="YYYYYYYYYY"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <main>
+        <form id="qrForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Inhaltstyp:</label>
+                <!-- Removed select, added button container -->
+                <div id="content-type-buttons" class="content-type-selector">
+                    <button type="button" class="content-type-btn" data-value="url">URL</button>
+                    <button type="button" class="content-type-btn" data-value="contact">Kontakt</button>
+                    <button type="button" class="content-type-btn" data-value="wifi">Wi-Fi</button>
+                    <button type="button" class="content-type-btn" data-value="text">Text</button>
+                </div>
+                <!-- Hidden input to store the selected value -->
+                <input type="hidden" name="content_type" id="content_type" value="">
+            </div>
+
+            <div id="input_fields">
+                <!-- Dynamische Eingabefelder werden hier per JS eingefügt -->
+                <p style="text-align: center; color: #6c757d; margin-top: 15px;">Bitte wähle einen Inhaltstyp aus.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="logo">Logo hochladen (optional, max. 2MB):</label>
+                <input type="file" name="logo" id="logo" accept=".png, .jpg, .jpeg, .svg">
+                <small>Unterstützte Formate: PNG, JPG, SVG. Logo wird aktuell noch nicht eingefügt.</small>
+            </div>
+
+            <button type="submit">QR-Code generieren</button>
+        </form>
+
+        <div id="qr-code-result" style="margin-top: 30px; text-align: center;">
+            <!-- Hier wird der generierte QR-Code angezeigt -->
+        </div>
+    </main>
+
+    <!-- Google AdSense Banner unten -->
+    <div class="adsense-banner adsense-bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="ZZZZZZZZZZ"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <footer>
+        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
+        <p>&copy; 2023 QR-Code Generator</p>
+    </footer>
+
+    <script src="adsense.js"></script>
+    <script src="js/main.js" defer></script>
+</body>
 </html>

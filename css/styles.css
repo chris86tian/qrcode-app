@@ -1,0 +1,253 @@
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa; /* Light gray background */
+    color: #343a40; /* Darker text color */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); /* Cool gradient */
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Main Content Styles */
+main {
+    flex: 1; /* Takes up remaining vertical space */
+    padding: 30px 20px;
+    max-width: 700px; /* Slightly wider */
+    width: 90%; /* Responsive width */
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between form groups */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #495057; /* Slightly lighter label color */
+}
+
+form input[type="text"],
+form input[type="url"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="password"], /* Added password type */
+form select,
+form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da; /* Lighter border */
+    border-radius: 8px; /* Rounded inputs */
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #4facfe; /* Highlight color on focus */
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25); /* Subtle focus glow */
+}
+
+form input[type="file"] {
+    padding: 10px;
+    border: 1px dashed #ced4da;
+    border-radius: 8px;
+    background-color: #f1f3f5;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+form input[type="file"]:hover {
+    background-color: #e9ecef;
+}
+
+form small {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+/* Content Type Button Styles */
+.content-type-selector {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    gap: 10px; /* Space between buttons */
+    margin-top: 5px; /* Space below the label */
+}
+
+.content-type-btn {
+    padding: 10px 18px;
+    border: 1px solid #ced4da;
+    border-radius: 20px; /* Pill shape */
+    background-color: #ffffff;
+    color: #495057;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    flex-grow: 1; /* Allow buttons to grow */
+    text-align: center;
+}
+
+.content-type-btn:hover {
+    background-color: #f1f3f5;
+    border-color: #adb5bd;
+}
+
+.content-type-btn.active {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: #ffffff;
+    border-color: #4facfe;
+    box-shadow: 0 4px 10px rgba(79, 172, 254, 0.3);
+}
+
+/* Input Fields Placeholder */
+#input_fields {
+    min-height: 50px; /* Give it some initial height */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+/* Button Styles */
+form button[type="submit"] { /* Be more specific */
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 15px; /* Add some space above the button */
+}
+
+form button[type="submit"]:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3); /* Enhanced shadow on hover */
+}
+
+/* QR Code Result Styles */
+#qr-code-result img {
+    display: block;
+    margin: 15px auto;
+    max-width: 90%; /* Ensure it fits */
+    height: auto;
+    border: 1px solid #e9ecef;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green download button */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.download-button:hover {
+    background-color: #218838;
+}
+
+
+/* AdSense Banner Styles */
+.adsense-banner {
+    text-align: center;
+    margin: 25px auto; /* Center banners */
+    max-width: 728px; /* Standard banner width */
+    width: 90%;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40; /* Dark footer */
+    color: #adb5bd; /* Lighter text */
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px; /* Space above footer */
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #e9ecef; /* Even lighter link color */
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #ffffff; /* White on hover */
+}
+
+footer p {
+    margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    header p {
+        font-size: 1rem;
+    }
+    main {
+        width: 95%;
+        padding: 20px 15px;
+    }
+    form button[type="submit"] {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    .content-type-selector {
+        gap: 8px; /* Slightly smaller gap */
+    }
+    .content-type-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
