@@ -28,6 +28,14 @@ header {
     gap: 10px; /* Gap between items if they wrap */
 }
 
+/* Header Left Section (Title + Nav) - New */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between title and nav */
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
 /* Site Title Style - Updated */
 .site-title {
     font-size: 2.0rem; /* Reduced font size */
@@ -37,6 +45,27 @@ header {
     margin: 0; /* Remove default margins */
     flex-shrink: 0; /* Prevent shrinking */
 }
+
+/* Header Navigation - New */
+.header-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 0; /* Add some vertical padding */
+    border-bottom: 2px solid transparent; /* For hover effect */
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.header-nav a:hover {
+    opacity: 0.9;
+    border-bottom-color: rgba(255, 255, 255, 0.7); /* Subtle underline on hover */
+}
+
 
 /* Header Text (H1 + P) Container - New */
 .header-text {
@@ -102,6 +131,7 @@ form {
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-bottom: 15px; /* Add some space below each group */
 }
 
 /* Style for grouping options like colors and logo */
@@ -120,7 +150,7 @@ form {
 }
 
 
-form label {
+form label, main label { /* Apply to labels in main content */
     font-weight: 600;
     margin-bottom: 8px;
     color: #495057; /* Slightly lighter label color */
@@ -132,18 +162,21 @@ form input[type="email"],
 form input[type="tel"],
 form input[type="password"],
 form select,
-form textarea {
+form textarea,
+main textarea { /* Apply to textareas in main */
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #ced4da; /* Lighter border */
     border-radius: 8px; /* Rounded inputs */
     font-size: 1rem;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit; /* Ensure textarea uses body font */
 }
 
 form input:focus,
 form select:focus,
-form textarea:focus {
+form textarea:focus,
+main textarea:focus { /* Apply focus styles */
     outline: none;
     border-color: #4facfe; /* Highlight color on focus */
     box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25); /* Subtle focus glow */
@@ -412,7 +445,7 @@ footer {
     color: #adb5bd; /* Lighter text */
     text-align: center;
     padding: 20px 0;
-    margin-top: 0; /* Remove top margin as FAQ section provides space */
+    margin-top: 30px; /* Ensure space above footer */
     font-size: 0.9rem;
     flex-shrink: 0; /* Prevent footer from shrinking */
 }
@@ -501,19 +534,116 @@ footer p {
     margin: 1em 0;
 }
 
+/* Unicode Converter Page Styles */
+.unicode-converter-main {
+    /* Uses the same main styles */
+}
+
+#outputContainer {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+#outputContainer h2 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    color: #343a40;
+}
+
+.unicode-output-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Wrap on small screens */
+}
+
+.output-text-wrapper {
+   flex-grow: 1; /* Allow text to take space */
+   overflow-wrap: break-word; /* Break long words */
+   word-wrap: break-word; /* Legacy */
+   word-break: break-all; /* Ensure breaks */
+}
+
+
+.style-name {
+    font-weight: 600;
+    color: #495057;
+    margin-right: 10px;
+    display: block; /* Put name on its own line */
+    margin-bottom: 5px;
+}
+
+.output-text {
+    font-size: 1.1rem; /* Make converted text slightly larger */
+    line-height: 1.5;
+    color: #212529;
+}
+
+.copy-button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+}
+
+/* Info Section Styles (for Unicode page) */
+.info-section {
+    padding: 30px 20px;
+    max-width: 700px; /* Match main content width */
+    width: 90%; /* Responsive width */
+    margin: 30px auto; /* Space above and below */
+    background-color: #e9ecef; /* Different background */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.info-section p {
+    color: #495057;
+    text-align: center;
+    line-height: 1.7;
+}
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     header {
         justify-content: center; /* Center items when they wrap */
+        gap: 15px;
+    }
+    .header-left {
+        width: 100%; /* Allow title/nav to take full width */
+        justify-content: center; /* Center title and nav */
+        order: 1; /* Title/Nav first */
+        gap: 10px 20px; /* Adjust gaps */
     }
     .header-text {
-        order: 1; /* Ensure text is first when wrapped */
+        order: 2; /* Description second */
         width: 100%; /* Take full width when wrapped */
         margin-bottom: 10px; /* Add space below when wrapped */
-    }
-    .site-title {
-        order: 2; /* Domain below text */
     }
     .header-auth {
         order: 3; /* Auth links last */
@@ -525,10 +655,20 @@ footer p {
      .content-type-btn {
         min-width: 70px; /* Adjust min-width */
         padding: 8px 12px;
+        font-size: 0.85rem; /* Slightly smaller font */
     }
-    main, .faq-section, .content-type-descriptions {
+    main, .faq-section, .content-type-descriptions, .info-section {
         width: 95%;
         padding: 20px 15px;
+    }
+    .unicode-output-item {
+        flex-direction: column; /* Stack text and button vertically */
+        align-items: flex-start; /* Align items left */
+    }
+    .copy-button {
+        margin-top: 10px; /* Add space above button when stacked */
+        width: 100%; /* Make button full width */
+        text-align: center;
     }
 }
 
@@ -548,16 +688,23 @@ footer p {
     .header-text {
          min-width: 150px; /* Adjust min-width */
     }
+     .header-left {
+        gap: 10px; /* Reduce gap */
+    }
+    .header-nav a {
+        font-size: 0.9rem;
+    }
     .header-auth {
         width: 100%; /* Make auth take full width when wrapped */
         text-align: center; /* Center auth links */
         margin-top: 10px; /* Add space above auth links */
+        order: 3; /* Ensure it's last */
     }
     .header-auth a {
         margin: 0 10px; /* Adjust spacing */
     }
 
-    main, .blog-content, .faq-section, .content-type-descriptions {
+    main, .blog-content, .faq-section, .content-type-descriptions, .info-section {
         width: 95%;
         padding: 20px 15px;
     }
@@ -569,8 +716,9 @@ footer p {
         gap: 8px; /* Slightly smaller gap */
     }
     .content-type-btn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
+        padding: 8px 12px; /* Adjust padding */
+        font-size: 0.8rem; /* Further reduce font size */
+        min-width: 60px; /* Adjust min width */
     }
     .options-group {
         grid-template-columns: 1fr; /* Stack to 1 column */
@@ -600,6 +748,18 @@ footer p {
         font-size: 1.1rem;
     }
     .description-text {
+        font-size: 0.9rem;
+    }
+    #outputContainer h2 {
+        font-size: 1.2rem;
+    }
+    .output-text {
+        font-size: 1rem;
+    }
+    .info-section h2 {
+        font-size: 1.4rem;
+    }
+    .info-section p {
         font-size: 0.9rem;
     }
 }

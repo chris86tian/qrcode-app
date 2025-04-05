@@ -143,7 +143,7 @@ app.post('/generate', upload.single('logo'), async (req, res, next) => {
     const darkColor = isValidHexColor(req.body.darkColor) ? req.body.darkColor : '#000000';
     const lightColor = isValidHexColor(req.body.lightColor) ? req.body.lightColor : '#FFFFFF';
 
-    // Construct QR Data based on content type (same logic as before)
+    // Construct QR Data based on content type
     switch (contentType) {
       case 'url':
         qrData = req.body.url || '';
@@ -214,6 +214,13 @@ END:VCARD`;
         if (!qrData.includes('youtube.com') && !qrData.includes('youtu.be')) {
              console.warn('Potentially invalid YouTube URL:', qrData);
         }
+        if (!qrData.startsWith('http://') && !qrData.startsWith('https://')) {
+          qrData = 'https://' + qrData;
+        }
+        break;
+      case 'bewertung': // New Case
+        qrData = req.body.review_url || '';
+        if (!qrData) throw new Error('Bewertungs-URL is required.');
         if (!qrData.startsWith('http://') && !qrData.startsWith('https://')) {
           qrData = 'https://' + qrData;
         }
@@ -381,6 +388,11 @@ app.get('/datenschutz.html', (req, res) => {
 
 app.get('/blog-qr-code-mit-logo.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'blog-qr-code-mit-logo.html'));
+});
+
+// New route for the Unicode page
+app.get('/social-media-unicode.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'social-media-unicode.html'));
 });
 
 

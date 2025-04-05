@@ -143,7 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="url" name="youtube_url" id="youtube_url" placeholder="https://www.youtube.com/watch?v=..." required>
                  <small>Link zu Video, Kanal oder Playlist.</small>
             </div>
-        `
+        `,
+        bewertung: `
+            <div class="form-group">
+                <label for="review_url">Bewertungs-URL:</label>
+                <input type="url" name="review_url" id="review_url" placeholder="https://g.page/r/..." required>
+                <small>Link zu Ihrer Bewertungsseite (z.B. Google, Yelp).</small>
+            </div>
+        ` // New Template
     };
 
     function updateFormFields() {

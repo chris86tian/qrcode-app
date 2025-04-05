@@ -6,7 +6,7 @@
     <!-- SEO: Optimierter Title -->
     <title>QR-Code Generator mit Logo & Farben | K1Q.de</title>
     <!-- SEO: Meta Description hinzugefügt -->
-    <meta name="description" content="Erstellen Sie individuelle QR-Codes mit Ihrem Logo und benutzerdefinierten Farben. Einfach, schnell und kostenlos mit dem QR-Code Generator von K1Q.de. Unterstützt URL, Kontakt, WLAN, Text, E-Mail, SMS, WhatsApp, Spotify und YouTube.">
+    <meta name="description" content="Erstellen Sie individuelle QR-Codes mit Ihrem Logo und benutzerdefinierten Farben. Einfach, schnell und kostenlos mit dem QR-Code Generator von K1Q.de. Unterstützt URL, Kontakt, WLAN, Text, E-Mail, SMS, WhatsApp, Spotify, YouTube und Bewertung.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,13 @@
 <body>
     <!-- Updated Header Structure -->
     <header>
-        <div class="site-title">K1Q.de</div>
+        <div class="header-left"> <!-- New container for title and nav -->
+            <div class="site-title">K1Q.de</div>
+            <nav class="header-nav"> <!-- New nav element -->
+                <a href="/">QR Code</a>
+                <a href="/social-media-unicode.html">Unicode Text</a>
+            </nav>
+        </div>
         <div class="header-text">
             <!-- SEO: H1 angepasst -->
             <h1>QR-Code Generator mit Logo</h1>
@@ -26,12 +32,7 @@
             <p>Erstellen Sie individuelle QR-Codes mit Logo und Farben – für URLs, Kontakte, WLAN & mehr</p>
         </div>
         <div class="header-auth">
-            <!-- Placeholder for Login/Register links -->
-            <a href="/login">Anmelden</a>
-            <a href="/register">Registrieren</a>
-            <!-- Logged-in state example (to be implemented) -->
-            <!-- <a href="/dashboard">Meine Codes</a> -->
-            <!-- <a href="/logout">Abmelden</a> -->
+            <!-- Login/Register links removed -->
         </div>
     </header>
 
@@ -66,6 +67,7 @@
                     <button type="button" class="content-type-btn" data-value="whatsapp">WhatsApp</button>
                     <button type="button" class="content-type-btn" data-value="spotify">Spotify</button>
                     <button type="button" class="content-type-btn" data-value="youtube">YouTube</button>
+                    <button type="button" class="content-type-btn" data-value="bewertung">Bewertung</button> <!-- New Button -->
                 </div>
                 <input type="hidden" name="content_type" id="content_type" value="">
             </div>
@@ -152,6 +154,10 @@
                 <h3 class="description-title">YouTube</h3>
                 <p class="description-text">Leiten Sie Nutzer direkt zu einem YouTube-Video, einem Kanal oder einer Playlist weiter.</p>
             </div>
+             <div class="description-item">
+                <h3 class="description-title">Bewertung</h3> <!-- New Description -->
+                <p class="description-text">Verlinken Sie direkt zu Ihrer Bewertungsseite, z.B. auf Google Maps, Yelp, Trustpilot oder einer anderen Plattform.</p>
+            </div>
         </div>
     </section>
     <!-- End Content Type Descriptions Section -->
@@ -230,7 +236,7 @@
     <!-- Ende Google AdSense Banner unten -->
 
     <footer>
-        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a> | <a href="blog-qr-code-mit-logo.html">Blog</a>
+        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a> | <a href="blog-qr-code-mit-logo.html">Blog</a> | <a href="social-media-unicode.html">Unicode Text</a> <!-- New Link -->
         <p>&copy; 2025 K1Q.de QR-Code Generator</p>
     </footer>
 
