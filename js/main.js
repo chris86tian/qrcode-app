@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Removed contentTypeSelect
     const contentTypeButtonsContainer = document.getElementById('content-type-buttons');
-    const contentTypeHiddenInput = document.getElementById('content_type'); // Hidden input
+    const contentTypeHiddenInput = document.getElementById('content_type');
     const inputFieldsDiv = document.getElementById('input_fields');
     const qrForm = document.getElementById('qrForm');
     const qrCodeResultDiv = document.getElementById('qr-code-result');
+    // Color inputs (added)
+    const darkColorInput = document.getElementById('darkColor');
+    const lightColorInput = document.getElementById('lightColor');
 
     const fieldTemplates = {
         url: `
@@ -92,54 +94,86 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="text">Text:</label>
                 <textarea name="text" id="text" rows="4" required></textarea>
             </div>
+        `,
+        // --- New Templates ---
+        email: `
+            <div class="form-group">
+                <label for="email_address">Empfänger E-Mail:</label>
+                <input type="email" name="email_address" id="email_address" required>
+            </div>
+            <div class="form-group">
+                <label for="email_subject">Betreff:</label>
+                <input type="text" name="email_subject" id="email_subject">
+            </div>
+            <div class="form-group">
+                <label for="email_body">Nachricht:</label>
+                <textarea name="email_body" id="email_body" rows="3"></textarea>
+            </div>
+        `,
+        sms: `
+            <div class="form-group">
+                <label for="sms_number">Telefonnummer:</label>
+                <input type="tel" name="sms_number" id="sms_number" placeholder="+49123456789" required>
+            </div>
+            <div class="form-group">
+                <label for="sms_body">Nachricht:</label>
+                <textarea name="sms_body" id="sms_body" rows="3"></textarea>
+            </div>
+        `,
+        whatsapp: `
+            <div class="form-group">
+                <label for="whatsapp_number">WhatsApp Nummer:</label>
+                <input type="tel" name="whatsapp_number" id="whatsapp_number" placeholder="49123456789" required>
+                <small>Internationale Vorwahl ohne '+' oder '00'. Beispiel: 49 für Deutschland.</small>
+            </div>
+            <div class="form-group">
+                <label for="whatsapp_message">Nachricht (optional):</label>
+                <textarea name="whatsapp_message" id="whatsapp_message" rows="3"></textarea>
+            </div>
         `
     };
 
     function updateFormFields() {
-        // Get value from the hidden input
         const selectedType = contentTypeHiddenInput.value;
         inputFieldsDiv.innerHTML = fieldTemplates[selectedType] || '<p style="text-align: center; color: #6c757d; margin-top: 15px;">Bitte wähle einen Inhaltstyp aus.</p>';
     }
 
-    // Add event listener to the button container (event delegation)
     contentTypeButtonsContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('content-type-btn')) {
             const selectedButton = event.target;
             const selectedValue = selectedButton.dataset.value;
 
-            // Update hidden input value
             contentTypeHiddenInput.value = selectedValue;
 
-            // Update button active states
             const allButtons = contentTypeButtonsContainer.querySelectorAll('.content-type-btn');
             allButtons.forEach(btn => btn.classList.remove('active'));
             selectedButton.classList.add('active');
 
-            // Update the dynamic fields
             updateFormFields();
         }
     });
 
-    // Initial state - no fields shown until a button is clicked
-    updateFormFields();
+    updateFormFields(); // Initial call
 
-    // Handle form submission (remains the same)
     qrForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         qrCodeResultDiv.innerHTML = '<p>Generiere QR-Code...</p>';
 
-        // Check if a content type is selected
         if (!contentTypeHiddenInput.value) {
              qrCodeResultDiv.innerHTML = '<p style="color: red;">Bitte wähle zuerst einen Inhaltstyp aus.</p>';
-             return; // Stop submission if no type is selected
+             return;
         }
 
         const formData = new FormData(qrForm);
 
+        // Append color values (already included by default form behavior if named)
+        // formData.append('darkColor', darkColorInput.value);
+        // formData.append('lightColor', lightColorInput.value);
+
         try {
             const response = await fetch('/generate', {
                 method: 'POST',
-                body: formData
+                body: formData // FormData handles multipart/form-data automatically
             });
 
             if (!response.ok) {
@@ -147,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     const errorData = await response.json();
                     errorMsg = errorData.error || errorMsg;
-                } catch (e) { /* Ignore */ }
+                } catch (e) { /* Ignore if response is not JSON */ }
                 throw new Error(`${response.status}: ${errorMsg}`);
             }
 
@@ -156,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.qrCodeUrl) {
                 qrCodeResultDiv.innerHTML = `
                     <h2>Dein QR-Code:</h2>
-                    <img src="${result.qrCodeUrl}" alt="Generierter QR-Code">
+                    <img src="${result.qrCodeUrl}" alt="Generierter QR-Code" style="background-color: ${lightColorInput.value};"> <!-- Add background color to img preview -->
                     <br>
                     <a href="${result.qrCodeUrl}" download="qr-code.png" class="download-button">
                         Download PNG

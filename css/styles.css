@@ -20,19 +20,30 @@ header {
     background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); /* Cool gradient */
     color: #fff;
     text-align: center;
-    padding: 40px 20px;
+    padding: 30px 20px; /* Adjusted padding */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Site Title Style */
+.site-title {
+    font-size: 3.5rem; /* Larger font size */
+    font-weight: 700; /* Bold */
+    margin-bottom: 5px; /* Space below title */
+    letter-spacing: 1px; /* Slight letter spacing */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+
 header h1 {
-    font-size: 2.5rem;
+    font-size: 2.0rem; /* Slightly smaller H1 */
     margin-bottom: 10px;
     font-weight: 600;
+    opacity: 0.95; /* Slightly less prominent */
 }
 
 header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-size: 1.0rem; /* Slightly smaller paragraph */
+    opacity: 0.85;
 }
 
 /* Main Content Styles */
@@ -59,6 +70,22 @@ form {
     flex-direction: column;
 }
 
+/* Style for grouping options like colors and logo */
+.options-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between items */
+    align-items: end; /* Align items to the bottom */
+    border-top: 1px solid #eee; /* Separator line */
+    padding-top: 20px; /* Space above the options */
+}
+
+.options-group > div {
+    display: flex;
+    flex-direction: column;
+}
+
+
 form label {
     font-weight: 600;
     margin-bottom: 8px;
@@ -69,7 +96,7 @@ form input[type="text"],
 form input[type="url"],
 form input[type="email"],
 form input[type="tel"],
-form input[type="password"], /* Added password type */
+form input[type="password"],
 form select,
 form textarea {
     width: 100%;
@@ -88,6 +115,16 @@ form textarea:focus {
     box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25); /* Subtle focus glow */
 }
 
+/* Color Input Styles */
+form input[type="color"] {
+    height: 45px; /* Match height of other inputs */
+    padding: 5px; /* Minimal padding */
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%; /* Take full width of grid cell */
+}
+
 form input[type="file"] {
     padding: 10px;
     border: 1px dashed #ced4da;
@@ -95,6 +132,10 @@ form input[type="file"] {
     background-color: #f1f3f5;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    /* Ensure it aligns well in the grid */
+    height: 45px; /* Match height */
+    display: flex;
+    align-items: center;
 }
 
 form input[type="file"]:hover {
@@ -122,11 +163,12 @@ form small {
     background-color: #ffffff;
     color: #495057;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.90rem; /* Slightly smaller to fit more buttons */
     font-weight: 500;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     flex-grow: 1; /* Allow buttons to grow */
     text-align: center;
+    min-width: 80px; /* Minimum width */
 }
 
 .content-type-btn:hover {
@@ -175,6 +217,7 @@ form button[type="submit"]:hover {
     border: 1px solid #e9ecef;
     padding: 5px;
     border-radius: 8px;
+    background-color: white; /* Ensure background is white if transparent */
 }
 
 .download-button {
@@ -227,15 +270,99 @@ footer p {
     margin-top: 10px;
 }
 
+/* Blog Page Specific Styles */
+.blog-content {
+    padding: 30px 20px;
+    max-width: 800px; /* Wider for blog content */
+    width: 90%;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.blog-content h1, .blog-content h2, .blog-content h3 {
+    color: #343a40;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    line-height: 1.3;
+}
+
+.blog-content h1 {
+    font-size: 2.2rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.3em;
+}
+
+.blog-content h2 {
+    font-size: 1.8rem;
+}
+
+.blog-content h3 {
+    font-size: 1.4rem;
+}
+
+.blog-content p {
+    margin-bottom: 1.2em;
+    color: #495057;
+}
+
+.blog-content ul, .blog-content ol {
+    margin-left: 25px;
+    margin-bottom: 1.2em;
+}
+
+.blog-content li {
+    margin-bottom: 0.5em;
+}
+
+.blog-content a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.blog-content a:hover {
+    text-decoration: underline;
+}
+
+.blog-content code {
+    background-color: #e9ecef;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1em 0;
+}
+
+
 /* Responsive Adjustments */
+@media (max-width: 768px) {
+    .options-group {
+        grid-template-columns: 1fr 1fr; /* Stack to 2 columns */
+    }
+     .content-type-btn {
+        min-width: 70px; /* Adjust min-width */
+        padding: 8px 12px;
+    }
+}
+
+
 @media (max-width: 600px) {
+    .site-title {
+        font-size: 2.8rem; /* Adjust site title size */
+    }
     header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem; /* Adjust H1 size */
     }
     header p {
-        font-size: 1rem;
+        font-size: 0.9rem; /* Adjust paragraph size */
     }
-    main {
+    main, .blog-content {
         width: 95%;
         padding: 20px 15px;
     }
@@ -250,4 +377,11 @@ footer p {
         padding: 8px 15px;
         font-size: 0.9rem;
     }
+    .options-group {
+        grid-template-columns: 1fr; /* Stack to 1 column */
+        gap: 15px;
+    }
+    .blog-content h1 { font-size: 1.8rem; }
+    .blog-content h2 { font-size: 1.5rem; }
+    .blog-content h3 { font-size: 1.2rem; }
 }

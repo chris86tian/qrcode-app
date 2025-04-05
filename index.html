@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR-Code Generator mit Logo</title>
+    <title>K1Q.de - QR-Code Generator mit Logo & Farben</title> <!-- Title angepasst -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <!-- Google AdSense -->
-    <script data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0494411758250043"
+     crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
+        <div class="site-title">K1Q.de</div>
         <h1>QR-Code Generator</h1>
-        <p>Erstelle QR-Codes mit deinem Logo</p>
+        <p>Erstelle individuelle QR-Codes mit Logo und Farben</p> <!-- Subtitle updated -->
     </header>
 
     <!-- Google AdSense Banner oben -->
     <div class="adsense-banner adsense-top">
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-             data-ad-slot="YYYYYYYYYY"
+             data-ad-client="ca-pub-0494411758250043"
+             data-ad-slot="YYYYYYYYYY" <!-- Slot ID muss noch angepasst werden -->
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -34,26 +36,36 @@
         <form id="qrForm" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Inhaltstyp:</label>
-                <!-- Removed select, added button container -->
                 <div id="content-type-buttons" class="content-type-selector">
                     <button type="button" class="content-type-btn" data-value="url">URL</button>
                     <button type="button" class="content-type-btn" data-value="contact">Kontakt</button>
                     <button type="button" class="content-type-btn" data-value="wifi">Wi-Fi</button>
                     <button type="button" class="content-type-btn" data-value="text">Text</button>
+                    <button type="button" class="content-type-btn" data-value="email">E-Mail</button> <!-- New -->
+                    <button type="button" class="content-type-btn" data-value="sms">SMS</button> <!-- New -->
+                    <button type="button" class="content-type-btn" data-value="whatsapp">WhatsApp</button> <!-- New -->
                 </div>
-                <!-- Hidden input to store the selected value -->
                 <input type="hidden" name="content_type" id="content_type" value="">
             </div>
 
             <div id="input_fields">
-                <!-- Dynamische Eingabefelder werden hier per JS eingefügt -->
                 <p style="text-align: center; color: #6c757d; margin-top: 15px;">Bitte wähle einen Inhaltstyp aus.</p>
             </div>
 
-            <div class="form-group">
-                <label for="logo">Logo hochladen (optional, max. 2MB):</label>
-                <input type="file" name="logo" id="logo" accept=".png, .jpg, .jpeg, .svg">
-                <small>Unterstützte Formate: PNG, JPG, SVG. Logo wird aktuell noch nicht eingefügt.</small>
+            <div class="form-group options-group"> <!-- Grouping options -->
+                <div>
+                    <label for="darkColor">Farbe (Punkte):</label>
+                    <input type="color" name="darkColor" id="darkColor" value="#000000">
+                </div>
+                <div>
+                    <label for="lightColor">Farbe (Hintergrund):</label>
+                    <input type="color" name="lightColor" id="lightColor" value="#FFFFFF">
+                </div>
+                <div>
+                    <label for="logo">Logo (optional, max. 2MB):</label>
+                    <input type="file" name="logo" id="logo" accept=".png, .jpg, .jpeg, .svg">
+                    <small>Wird mittig platziert.</small>
+                </div>
             </div>
 
             <button type="submit">QR-Code generieren</button>
@@ -68,8 +80,8 @@
     <div class="adsense-banner adsense-bottom">
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-             data-ad-slot="ZZZZZZZZZZ"
+             data-ad-client="ca-pub-0494411758250043"
+             data-ad-slot="ZZZZZZZZZZ" <!-- Slot ID muss noch angepasst werden -->
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -78,11 +90,11 @@
     </div>
 
     <footer>
-        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
-        <p>&copy; 2023 QR-Code Generator</p>
+        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a> | <a href="blog-qr-code-mit-logo.html">Blog</a> <!-- Blog Link Added -->
+        <p>&copy; 2025 K1Q.de QR-Code Generator</p>
     </footer>
 
-    <script src="adsense.js"></script>
+    <script src="adsense.js"></script> <!-- Beachte: Diese Datei existiert aktuell nicht -->
     <script src="js/main.js" defer></script>
 </body>
 </html>
