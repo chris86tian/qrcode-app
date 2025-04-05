@@ -48,11 +48,11 @@ header p {
 
 /* Main Content Styles */
 main {
-    flex: 1; /* Takes up remaining vertical space */
+    flex-grow: 0; /* Prevent main from stretching unnecessarily */
     padding: 30px 20px;
     max-width: 700px; /* Slightly wider */
     width: 90%; /* Responsive width */
-    margin: 30px auto;
+    margin: 30px auto 0 auto; /* Adjusted margin-bottom to 0 */
     background-color: #ffffff;
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
@@ -236,6 +236,133 @@ form button[type="submit"]:hover {
     background-color: #218838;
 }
 
+/* Content Type Descriptions Section Styles */
+.content-type-descriptions {
+    padding: 30px 20px;
+    max-width: 700px; /* Match main content width */
+    width: 90%; /* Responsive width */
+    margin: 30px auto; /* Space above and below */
+    background-color: #f1f3f5; /* Slightly different background */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+}
+
+.content-type-descriptions h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.content-type-descriptions .description-intro {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+.description-grid {
+    display: grid;
+    /* Create 2 columns on medium screens, 1 on small */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px; /* Space between items */
+}
+
+.description-item {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.description-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.description-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #4facfe; /* Use accent color */
+    margin-bottom: 10px;
+}
+
+.description-text {
+    font-size: 0.95rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+
+/* FAQ Section Styles */
+.faq-section {
+    padding: 30px 20px;
+    max-width: 700px; /* Match main content width */
+    width: 90%; /* Responsive width */
+    margin: 30px auto; /* Add space above and below */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.faq-item {
+    border-bottom: 1px solid #eee;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    padding: 15px 0;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    list-style: none; /* Remove default marker */
+    color: #495057;
+    transition: color 0.2s ease;
+}
+
+.faq-question:hover {
+    color: #007bff;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none; /* Hide default arrow in Chrome/Safari */
+}
+
+.faq-question::after { /* Custom arrow */
+    content: '+';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #adb5bd;
+    transition: transform 0.2s ease;
+}
+
+details[open] > summary.faq-question::after {
+    transform: translateY(-50%) rotate(45deg);
+    color: #4facfe;
+}
+
+.faq-answer {
+    padding: 0 5px 15px 5px; /* Padding for the answer */
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
 
 /* AdSense Banner Styles */
 .adsense-banner {
@@ -251,8 +378,9 @@ footer {
     color: #adb5bd; /* Lighter text */
     text-align: center;
     padding: 20px 0;
-    margin-top: 30px; /* Space above footer */
+    margin-top: 0; /* Remove top margin as FAQ section provides space */
     font-size: 0.9rem;
+    flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 footer a {
@@ -349,6 +477,10 @@ footer p {
         min-width: 70px; /* Adjust min-width */
         padding: 8px 12px;
     }
+    main, .faq-section, .content-type-descriptions {
+        width: 95%;
+        padding: 20px 15px;
+    }
 }
 
 
@@ -362,7 +494,7 @@ footer p {
     header p {
         font-size: 0.9rem; /* Adjust paragraph size */
     }
-    main, .blog-content {
+    main, .blog-content, .faq-section, .content-type-descriptions {
         width: 95%;
         padding: 20px 15px;
     }
@@ -384,4 +516,27 @@ footer p {
     .blog-content h1 { font-size: 1.8rem; }
     .blog-content h2 { font-size: 1.5rem; }
     .blog-content h3 { font-size: 1.2rem; }
+
+    .faq-section h2 {
+        font-size: 1.5rem;
+    }
+    .faq-question {
+        font-size: 1rem;
+    }
+    .faq-answer {
+        font-size: 0.9rem;
+    }
+    /* Ensure description grid stacks to 1 column */
+    .description-grid {
+        grid-template-columns: 1fr;
+    }
+    .content-type-descriptions h2 {
+        font-size: 1.5rem;
+    }
+    .description-title {
+        font-size: 1.1rem;
+    }
+    .description-text {
+        font-size: 0.9rem;
+    }
 }

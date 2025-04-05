@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputFieldsDiv = document.getElementById('input_fields');
     const qrForm = document.getElementById('qrForm');
     const qrCodeResultDiv = document.getElementById('qr-code-result');
-    // Color inputs (added)
     const darkColorInput = document.getElementById('darkColor');
     const lightColorInput = document.getElementById('lightColor');
 
@@ -95,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <textarea name="text" id="text" rows="4" required></textarea>
             </div>
         `,
-        // --- New Templates ---
         email: `
             <div class="form-group">
                 <label for="email_address">Empfänger E-Mail:</label>
@@ -166,14 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formData = new FormData(qrForm);
 
-        // Append color values (already included by default form behavior if named)
-        // formData.append('darkColor', darkColorInput.value);
-        // formData.append('lightColor', lightColorInput.value);
-
         try {
             const response = await fetch('/generate', {
                 method: 'POST',
-                body: formData // FormData handles multipart/form-data automatically
+                body: formData
             });
 
             if (!response.ok) {
@@ -188,11 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (result.qrCodeUrl) {
+                // SEO: Added descriptive alt text
                 qrCodeResultDiv.innerHTML = `
                     <h2>Dein QR-Code:</h2>
-                    <img src="${result.qrCodeUrl}" alt="Generierter QR-Code" style="background-color: ${lightColorInput.value};"> <!-- Add background color to img preview -->
+                    <img src="${result.qrCodeUrl}" alt="Generierter QR-Code für ${contentTypeHiddenInput.value}" style="background-color: ${lightColorInput.value};">
                     <br>
-                    <a href="${result.qrCodeUrl}" download="qr-code.png" class="download-button">
+                    <a href="${result.qrCodeUrl}" download="qr-code-${contentTypeHiddenInput.value}.png" class="download-button">
                         Download PNG
                     </a>
                 `;
