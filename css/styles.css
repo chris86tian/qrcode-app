@@ -1,0 +1,1014 @@
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa; /* Light gray background */
+    color: #343a40; /* Darker text color */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles - Updated */
+header {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); /* Cool gradient */
+    color: #fff;
+    padding: 15px 20px; /* Reduced padding for smaller header */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out items */
+    align-items: center; /* Vertically center items */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 10px; /* Gap between items if they wrap */
+}
+
+/* Header Left Section (Title + Nav) - New */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between title and nav */
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+/* Site Title Style - Updated */
+.site-title {
+    font-size: 2.0rem; /* Reduced font size */
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+    margin: 0; /* Remove default margins */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Header Navigation - New */
+.header-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 0; /* Add some vertical padding */
+    border-bottom: 2px solid transparent; /* For hover effect */
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.header-nav a:hover {
+    opacity: 0.9;
+    border-bottom-color: rgba(255, 255, 255, 0.7); /* Subtle underline on hover */
+}
+
+
+/* Header Text (H1 + P) Container - New */
+.header-text {
+    text-align: center;
+    flex-grow: 1; /* Allow text to take available space */
+    min-width: 200px; /* Prevent text from becoming too narrow */
+}
+
+
+header h1 {
+    font-size: 1.5rem; /* Reduced font size */
+    margin-bottom: 2px; /* Reduced margin */
+    font-weight: 600;
+    opacity: 0.95;
+}
+
+header p {
+    font-size: 0.9rem; /* Reduced font size */
+    opacity: 0.85;
+    margin: 0;
+}
+
+/* Header Auth Area - New Placeholder */
+.header-auth {
+    /* Placeholder for Login/Register/User Info */
+    min-width: 100px; /* Ensure some space */
+    text-align: right;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.header-auth a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.header-auth a:hover {
+    opacity: 0.8;
+}
+
+
+/* Main Content Styles */
+main {
+    flex-grow: 0; /* Prevent main from stretching unnecessarily */
+    padding: 30px 20px;
+    max-width: 700px; /* Slightly wider */
+    width: 90%; /* Responsive width */
+    margin: 30px auto 0 auto; /* Adjusted margin-bottom to 0 */
+    background-color: #ffffff;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between form groups */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Add some space below each group */
+}
+
+/* Style for grouping options like colors and logo */
+.options-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between items */
+    align-items: end; /* Align items to the bottom */
+    border-top: 1px solid #eee; /* Separator line */
+    padding-top: 20px; /* Space above the options */
+}
+
+.options-group > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Color Container with Transparency Controls */
+.background-color-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.color-transparency-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.transparency-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.transparency-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #495057;
+    margin: 0;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.transparency-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, #4facfe 0%, #4facfe 0%, #ddd 0%, #ddd 100%);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.transparency-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4facfe;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.transparency-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(79, 172, 254, 0.4);
+}
+
+.transparency-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4facfe;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.transparency-slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(79, 172, 254, 0.4);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
+#transparency-value {
+    font-weight: 600;
+    color: #4facfe;
+    background: #f0f8ff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+form label, main label { /* Apply to labels in main content */
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #495057; /* Slightly lighter label color */
+}
+
+form input[type="text"],
+form input[type="url"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="password"],
+form select,
+form textarea,
+main textarea { /* Apply to textareas in main */
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da; /* Lighter border */
+    border-radius: 8px; /* Rounded inputs */
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit; /* Ensure textarea uses body font */
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus,
+main textarea:focus { /* Apply focus styles */
+    outline: none;
+    border-color: #4facfe; /* Highlight color on focus */
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25); /* Subtle focus glow */
+}
+
+/* Color Input Styles */
+form input[type="color"] {
+    height: 45px; /* Match height of other inputs */
+    padding: 5px; /* Minimal padding */
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%; /* Take full width of grid cell */
+}
+
+form input[type="file"] {
+    padding: 10px;
+    border: 1px dashed #ced4da;
+    border-radius: 8px;
+    background-color: #f1f3f5;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    /* Ensure it aligns well in the grid */
+    height: 45px; /* Match height */
+    display: flex;
+    align-items: center;
+}
+
+form input[type="file"]:hover {
+    background-color: #e9ecef;
+}
+
+form small {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+/* Radio Button Styles für weiße QR-Code Optionen */
+.radio-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    background-color: #f8f9fa;
+}
+
+.radio-option:hover {
+    border-color: #4facfe;
+    background-color: #f0f8ff;
+}
+
+.radio-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4facfe;
+    margin-top: 2px;
+}
+
+.radio-option input[type="radio"]:checked + .radio-text {
+    color: #4facfe;
+    font-weight: 600;
+}
+
+.radio-option:has(input[type="radio"]:checked) {
+    border-color: #4facfe;
+    background-color: #f0f8ff;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+}
+
+.radio-text {
+    color: #495057;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.radio-text strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1rem;
+}
+
+.radio-text small {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+/* Weiße QR-Code Warnung */
+.white-qr-notice {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 2px solid #ffc107;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.white-qr-notice h4 {
+    color: #856404;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.white-qr-notice p {
+    color: #856404;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.white-qr-alternatives {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Content Type Button Styles */
+.content-type-selector {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    gap: 10px; /* Space between buttons */
+    margin-top: 5px; /* Space below the label */
+}
+
+.content-type-btn {
+    padding: 10px 18px;
+    border: 1px solid #ced4da;
+    border-radius: 20px; /* Pill shape */
+    background-color: #ffffff;
+    color: #495057;
+    cursor: pointer;
+    font-size: 0.90rem; /* Slightly smaller to fit more buttons */
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    flex-grow: 1; /* Allow buttons to grow */
+    text-align: center;
+    min-width: 80px; /* Minimum width */
+}
+
+.content-type-btn:hover {
+    background-color: #f1f3f5;
+    border-color: #adb5bd;
+}
+
+.content-type-btn.active {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: #ffffff;
+    border-color: #4facfe;
+    box-shadow: 0 4px 10px rgba(79, 172, 254, 0.3);
+}
+
+/* Input Fields Placeholder */
+#input_fields {
+    min-height: 50px; /* Give it some initial height */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+/* Button Styles */
+form button[type="submit"] { /* Be more specific */
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 15px; /* Add some space above the button */
+}
+
+form button[type="submit"]:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3); /* Enhanced shadow on hover */
+}
+
+/* QR Code Result Styles */
+#qr-code-result img {
+    display: block;
+    margin: 15px auto;
+    max-width: 90%; /* Ensure it fits */
+    height: auto;
+    border: 1px solid #e9ecef;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: white; /* Default background for non-transparent QR codes */
+}
+
+/* Container für transparente QR-Codes mit Schachbrettmuster */
+#qr-code-result img.transparent-qr {
+    /* Entferne den weißen Hintergrund */
+    background-color: transparent !important;
+    
+    /* Schachbrettmuster als Hintergrund */
+    background-image: 
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    
+    /* Spezielle Umrandung für transparente QR-Codes */
+    border: 2px solid #4facfe;
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.2);
+    
+    /* Wichtig: Das Schachbrettmuster soll nur hinter dem transparenten QR-Code sichtbar sein */
+    background-clip: padding-box;
+}
+
+/* Spezielle Styles für weiße QR-Codes mit verschiedenen Modi */
+#qr-code-result img.white-qr-dark-bg {
+    background-color: #2c3e50 !important;
+    border: 2px solid #34495e;
+}
+
+#qr-code-result img.white-qr-outline {
+    filter: drop-shadow(1px 1px 0px #000) 
+            drop-shadow(-1px -1px 0px #000) 
+            drop-shadow(1px -1px 0px #000) 
+            drop-shadow(-1px 1px 0px #000);
+    background-color: transparent !important;
+    border: 2px solid #4facfe;
+}
+
+#qr-code-result img.white-qr-shadow {
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    background-color: transparent !important;
+    border: 2px solid #4facfe;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green download button */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.download-button:hover {
+    background-color: #218838;
+}
+
+/* Content Type Descriptions Section Styles */
+.content-type-descriptions {
+    padding: 30px 20px;
+    max-width: 700px; /* Match main content width */
+    width: 90%; /* Responsive width */
+    margin: 30px auto; /* Space above and below */
+    background-color: #f1f3f5; /* Slightly different background */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+}
+
+.content-type-descriptions h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.content-type-descriptions .description-intro {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+.description-grid {
+    display: grid;
+    /* Create 2 columns on medium screens, 1 on small */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px; /* Space between items */
+}
+
+.description-item {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.description-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.description-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #4facfe; /* Use accent color */
+    margin-bottom: 10px;
+}
+
+.description-text {
+    font-size: 0.95rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+
+/* FAQ Section Styles */
+.faq-section {
+    padding: 30px 20px;
+    max-width: 700px; /* Match main content width */
+    width: 90%; /* Responsive width */
+    margin: 30px auto; /* Add space above and below */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.faq-item {
+    border-bottom: 1px solid #eee;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    padding: 15px 0;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    list-style: none; /* Remove default marker */
+    color: #495057;
+    transition: color 0.2s ease;
+}
+
+.faq-question:hover {
+    color: #007bff;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none; /* Hide default arrow in Chrome/Safari */
+}
+
+.faq-question::after { /* Custom arrow */
+    content: '+';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #adb5bd;
+    transition: transform 0.2s ease;
+}
+
+details[open] > summary.faq-question::after {
+    transform: translateY(-50%) rotate(45deg);
+    color: #4facfe;
+}
+
+.faq-answer {
+    padding: 0 5px 15px 5px; /* Padding for the answer */
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+
+/* AdSense Banner Styles */
+.adsense-banner {
+    text-align: center;
+    margin: 25px auto; /* Center banners */
+    max-width: 728px; /* Standard banner width */
+    width: 90%;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40; /* Dark footer */
+    color: #adb5bd; /* Lighter text */
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px; /* Ensure space above footer */
+    font-size: 0.9rem;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+}
+
+footer a {
+    color: #e9ecef; /* Even lighter link color */
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #ffffff; /* White on hover */
+}
+
+footer p {
+    margin-top: 10px;
+}
+
+/* Blog Page Specific Styles */
+.blog-content {
+    padding: 30px 20px;
+    max-width: 800px; /* Wider for blog content */
+    width: 90%;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.blog-content h1, .blog-content h2, .blog-content h3 {
+    color: #343a40;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    line-height: 1.3;
+}
+
+.blog-content h1 {
+    font-size: 2.2rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.3em;
+}
+
+.blog-content h2 {
+    font-size: 1.8rem;
+}
+
+.blog-content h3 {
+    font-size: 1.4rem;
+}
+
+.blog-content p {
+    margin-bottom: 1.2em;
+    color: #495057;
+}
+
+.blog-content ul, .blog-content ol {
+    margin-left: 25px;
+    margin-bottom: 1.2em;
+}
+
+.blog-content li {
+    margin-bottom: 0.5em;
+}
+
+.blog-content a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.blog-content a:hover {
+    text-decoration: underline;
+}
+
+.blog-content code {
+    background-color: #e9ecef;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1em 0;
+}
+
+/* Unicode Converter Page Styles */
+.unicode-converter-main {
+    /* Uses the same main styles */
+}
+
+#outputContainer {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+#outputContainer h2 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    color: #343a40;
+}
+
+.unicode-output-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Wrap on small screens */
+}
+
+.output-text-wrapper {
+   flex-grow: 1; /* Allow text to take space */
+   overflow-wrap: break-word; /* Break long words */
+   word-wrap: break-word; /* Legacy */
+   word-break: break-all; /* Ensure breaks */
+}
+
+
+.style-name {
+    font-weight: 600;
+    color: #495057;
+    margin-right: 10px;
+    display: block; /* Put name on its own line */
+    margin-bottom: 5px;
+}
+
+.output-text {
+    font-size: 1.1rem; /* Make converted text slightly larger */
+    line-height: 1.5;
+    color: #212529;
+}
+
+.copy-button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+}
+
+/* Info Section Styles (for Unicode page) */
+.info-section {
+    padding: 30px 20px;
+    max-width: 700px; /* Match main content width */
+    width: 90%; /* Responsive width */
+    margin: 30px auto; /* Space above and below */
+    background-color: #e9ecef; /* Different background */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.info-section p {
+    color: #495057;
+    text-align: center;
+    line-height: 1.7;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    header {
+        justify-content: center; /* Center items when they wrap */
+        gap: 15px;
+    }
+    .header-left {
+        width: 100%; /* Allow title/nav to take full width */
+        justify-content: center; /* Center title and nav */
+        order: 1; /* Title/Nav first */
+        gap: 10px 20px; /* Adjust gaps */
+    }
+    .header-text {
+        order: 2; /* Description second */
+        width: 100%; /* Take full width when wrapped */
+        margin-bottom: 10px; /* Add space below when wrapped */
+    }
+    .header-auth {
+        order: 3; /* Auth links last */
+    }
+
+    .options-group {
+        grid-template-columns: 1fr 1fr; /* Stack to 2 columns */
+    }
+     .content-type-btn {
+        min-width: 70px; /* Adjust min-width */
+        padding: 8px 12px;
+        font-size: 0.85rem; /* Slightly smaller font */
+    }
+    main, .faq-section, .content-type-descriptions, .info-section {
+        width: 95%;
+        padding: 20px 15px;
+    }
+    .unicode-output-item {
+        flex-direction: column; /* Stack text and button vertically */
+        align-items: flex-start; /* Align items left */
+    }
+    .copy-button {
+        margin-top: 10px; /* Add space above button when stacked */
+        width: 100%; /* Make button full width */
+        text-align: center;
+    }
+    
+    /* Transparency controls responsive */
+    .color-transparency-wrapper {
+        gap: 8px;
+    }
+    
+    .slider-labels {
+        font-size: 0.75rem;
+    }
+    
+    /* Weiße QR-Code Alternativen auf mobilen Geräten */
+    .white-qr-alternatives {
+        gap: 8px;
+    }
+    
+    .radio-option {
+        padding: 12px;
+    }
+    
+    .radio-text strong {
+        font-size: 0.95rem;
+    }
+    
+    .radio-text small {
+        font-size: 0.8rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .site-title {
+        font-size: 1.8rem; /* Further adjust site title size */
+        width: auto; /* Allow title to determine its width */
+        text-align: center; /* Center title text if needed */
+    }
+    header h1 {
+        font-size: 1.3rem; /* Further adjust H1 size */
+    }
+    header p {
+        font-size: 0.8rem; /* Further adjust paragraph size */
+    }
+    .header-text {
+         min-width: 150px; /* Adjust min-width */
+    }
+     .header-left {
+        gap: 10px; /* Reduce gap */
+    }
+    .header-nav a {
+        font-size: 0.9rem;
+    }
+    .header-auth {
+        width: 100%; /* Make auth take full width when wrapped */
+        text-align: center; /* Center auth links */
+        margin-top: 10px; /* Add space above auth links */
+        order: 3; /* Ensure it's last */
+    }
+    .header-auth a {
+        margin: 0 10px; /* Adjust spacing */
+    }
+
+    main, .blog-content, .faq-section, .content-type-descriptions, .info-section {
+        width: 95%;
+        padding: 20px 15px;
+    }
+    form button[type="submit"] {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    .content-type-selector {
+        gap: 8px; /* Slightly smaller gap */
+    }
+    .content-type-btn {
+        padding: 8px 12px; /* Adjust padding */
+        font-size: 0.8rem; /* Further reduce font size */
+        min-width: 60px; /* Adjust min width */
+    }
+    .options-group {
+        grid-template-columns: 1fr; /* Stack to 1 column */
+        gap: 15px;
+    }
+    .blog-content h1 { font-size: 1.8rem; }
+    .blog-content h2 { font-size: 1.5rem; }
+    .blog-content h3 { font-size: 1.2rem; }
+
+    .faq-section h2 {
+        font-size: 1.5rem;
+    }
+    .faq-question {
+        font-size: 1rem;
+    }
+    .faq-answer {
+        font-size: 0.9rem;
+    }
+    /* Ensure description grid stacks to 1 column */
+    .description-grid {
+        grid-template-columns: 1fr;
+    }
+    .content-type-descriptions h2 {
+        font-size: 1.5rem;
+    }
+    .description-title {
+        font-size: 1.1rem;
+    }
+    .description-text {
+        font-size: 0.9rem;
+    }
+    #outputContainer h2 {
+        font-size: 1.2rem;
+    }
+    .output-text {
+        font-size: 1rem;
+    }
+    .info-section h2 {
+        font-size: 1.4rem;
+    }
+    .info-section p {
+        font-size: 0.9rem;
+    }
+}
