@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrieren | K1Q.de</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google AdSense Script Removed -->
+</head>
+<body>
+    <header>
+        <div class="site-title">K1Q.de</div>
+        <div class="header-text">
+            <h1>Registrieren</h1>
+            <p>Erstellen Sie Ihr K1Q.de Konto</p>
+        </div>
+        <div class="header-auth">
+             <!-- Links werden hier nicht benötigt -->
+        </div>
+    </header>
+
+    <!-- Google AdSense Banner oben - Removed -->
+
+    <main>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="username">Benutzername (optional):</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+             <div class="form-group">
+                <label for="passwordConfirm">Passwort bestätigen:</label>
+                <input type="password" name="passwordConfirm" id="passwordConfirm" required>
+            </div>
+            <button type="submit">Registrieren</button>
+             <p class="auth-switch">Bereits ein Konto? <a href="/login.html">Anmelden</a></p>
+        </form>
+         <div id="error-message" class="error-message" style="display: none;"></div>
+         <div id="success-message" class="success-message" style="display: none;"></div>
+    </main>
+
+    <!-- Google AdSense Banner Mitte - Removed -->
+
+    <!-- Google AdSense Banner unten - Removed -->
+
+    <footer>
+        <a href="/">Zurück zur Startseite</a> | <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
+        <p>&copy; 2025 K1Q.de QR-Code Generator</p>
+    </footer>
+
+     <!-- <script src="js/auth.js"></script> --> <!-- Ggf. separates JS für Auth -->
+     <!-- adsense.js script removed -->
+</body>
+</html>
