@@ -107,143 +107,118 @@ function generateQRContent(formData) {
   }
 }
 
-// Simplified glassmorphism dots QR code
+// Robust "Glassmorphism Dots" QR code generator
 async function createGlassmorphismQR(qrBuffer, size = 512) {
   try {
-    console.log('Creating glassmorphism QR...');
+    console.log('Attempting to create robust Glassmorphism QR...');
     const qrImage = await Jimp.read(qrBuffer);
-    console.log('QR image loaded, dimensions:', qrImage.getWidth(), 'x', qrImage.getHeight());
-    
-    const canvas = new Jimp(size, size, '#1a1a2e'); // Dark blue background
-    
-    // Get QR dimensions - use bitmap width/height for safety
+    const canvas = new Jimp(size, size, '#1a1a2e'); // Style-specific dark blue background
+
     const qrWidth = qrImage.bitmap.width;
-    const qrHeight = qrImage.bitmap.height;
-    
-    if (qrWidth === 0 || qrHeight === 0) {
-      console.error('Invalid QR dimensions');
-      return await Jimp.read(qrBuffer); // Fallback to original
+    if (qrWidth === 0) {
+        console.error('QR image has zero width.');
+        return await Jimp.read(qrBuffer); // Fallback
     }
-    
+
     const moduleSize = Math.floor(size / qrWidth);
-    console.log('Module size calculated:', moduleSize);
-    
-    // Simple dot creation without complex loops
-    for (let y = 0; y < qrHeight && y * moduleSize < size; y++) {
-      for (let x = 0; x < qrWidth && x * moduleSize < size; x++) {
-        try {
-          const pixelColor = qrImage.getPixelColor(x, y);
-          const { r } = Jimp.intToRGBA(pixelColor);
-          
-          if (r < 128) { // Dark pixel = QR module
-            const centerX = Math.floor(x * moduleSize + moduleSize / 2);
-            const centerY = Math.floor(y * moduleSize + moduleSize / 2);
-            const radius = Math.floor(moduleSize * 0.4);
-            
-            // Create simple white dot
-            for (let dy = -radius; dy <= radius; dy++) {
-              for (let dx = -radius; dx <= radius; dx++) {
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance <= radius) {
-                  const plotX = centerX + dx;
-                  const plotY = centerY + dy;
-                  if (plotX >= 0 && plotX < size && plotY >= 0 && plotY < size) {
-                    const alpha = Math.floor((1 - distance / radius) * 200 + 55);
-                    const color = Jimp.rgbaToInt(255, 255, 255, alpha);
-                    canvas.setPixelColor(color, plotX, plotY);
-                  }
-                }
-              }
-            }
-          }
-        } catch (pixelError) {
-          console.error('Error processing pixel at', x, y, ':', pixelError.message);
-          // Continue with next pixel
-        }
-      }
+    const radius = Math.floor(moduleSize * 0.4);
+    const radiusSq = radius * radius;
+
+    if (moduleSize <= 0 || radius <= 0) {
+        console.error('Calculated module size or radius is too small.');
+        return await Jimp.read(qrBuffer); // Fallback
     }
-    
-    console.log('Glassmorphism QR created successfully');
+
+    // Create a reusable dot template image once
+    const dot = new Jimp(radius * 2 + 1, radius * 2 + 1, 0x00000000);
+    dot.scan(0, 0, dot.bitmap.width, dot.bitmap.height, function (x, y, idx) {
+        const dx = x - radius;
+        const dy = y - radius;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq <= radiusSq) {
+            const distance = Math.sqrt(distSq);
+            const alpha = Math.floor((1 - distance / radius) * 200 + 55);
+            this.bitmap.data[idx + 0] = 255; // R (white)
+            this.bitmap.data[idx + 1] = 255; // G (white)
+            this.bitmap.data[idx + 2] = 255; // B (white)
+            this.bitmap.data[idx + 3] = alpha; // Alpha for glass effect
+        }
+    });
+
+    // Iterate over the source QR and composite the dot template
+    for (let y = 0; y < qrWidth; y++) {
+        for (let x = 0; x < qrWidth; x++) {
+            const pixelColor = qrImage.getPixelColor(x, y);
+            const { r } = Jimp.intToRGBA(pixelColor);
+
+            if (r < 128) { // It's a dark module, so we draw a dot
+                const centerX = Math.floor(x * moduleSize + moduleSize / 2);
+                const centerY = Math.floor(y * moduleSize + moduleSize / 2);
+                canvas.composite(dot, centerX - radius, centerY - radius);
+            }
+        }
+    }
+
+    console.log('Robust Glassmorphism QR created successfully.');
     return canvas;
   } catch (error) {
-    console.error('Error in createGlassmorphismQR:', error);
-    // Fallback to original QR
-    return await Jimp.read(qrBuffer);
+    console.error('CRITICAL ERROR in createGlassmorphismQR:', error);
+    return await Jimp.read(qrBuffer); // Fallback to original QR on any error
   }
 }
 
-// Simplified pixel perfect QR code
+// Robust "Pixel Perfect" QR code generator
 async function createPixelPerfectQR(qrBuffer, size = 512) {
   try {
-    console.log('Creating pixel perfect QR...');
+    console.log('Attempting to create robust Pixel Perfect QR...');
     const qrImage = await Jimp.read(qrBuffer);
-    console.log('QR image loaded, dimensions:', qrImage.getWidth(), 'x', qrImage.getHeight());
-    
-    const canvas = new Jimp(size, size, '#0a0a0a'); // Very dark background
-    
-    // Get QR dimensions
+    const canvas = new Jimp(size, size, '#0a0a0a'); // Style-specific very dark background
+
     const qrWidth = qrImage.bitmap.width;
-    const qrHeight = qrImage.bitmap.height;
-    
-    if (qrWidth === 0 || qrHeight === 0) {
-      console.error('Invalid QR dimensions');
-      return await Jimp.read(qrBuffer); // Fallback to original
+    if (qrWidth === 0) {
+        console.error('QR image has zero width.');
+        return await Jimp.read(qrBuffer); // Fallback
     }
-    
+
     const pixelSize = Math.floor(size / qrWidth);
-    console.log('Pixel size calculated:', pixelSize);
-    
-    // Neon colors
-    const colors = [
-      { r: 0, g: 255, b: 136 },   // Neon green
-      { r: 0, g: 204, b: 255 },   // Cyan  
-      { r: 255, g: 0, b: 128 }    // Pink
-    ];
-    
-    for (let y = 0; y < qrHeight && y * pixelSize < size; y++) {
-      for (let x = 0; x < qrWidth && x * pixelSize < size; x++) {
-        try {
-          const pixelColor = qrImage.getPixelColor(x, y);
-          const { r } = Jimp.intToRGBA(pixelColor);
-          
-          const startX = x * pixelSize;
-          const startY = y * pixelSize;
-          const endX = Math.min(startX + pixelSize, size);
-          const endY = Math.min(startY + pixelSize, size);
-          
-          if (r < 128) { // Dark pixel = QR module
-            const colorIndex = (x + y) % colors.length;
-            const color = colors[colorIndex];
-            const pixelColor = Jimp.rgbaToInt(color.r, color.g, color.b, 255);
-            
-            // Fill pixel block
-            for (let py = startY; py < endY; py++) {
-              for (let px = startX; px < endX; px++) {
-                canvas.setPixelColor(pixelColor, px, py);
-              }
-            }
-          } else {
-            // Background pixel
-            const bgColor = Jimp.rgbaToInt(20, 20, 20, 255);
-            for (let py = startY; py < endY; py++) {
-              for (let px = startX; px < endX; px++) {
-                canvas.setPixelColor(bgColor, px, py);
-              }
-            }
-          }
-        } catch (pixelError) {
-          console.error('Error processing pixel at', x, y, ':', pixelError.message);
-          // Continue with next pixel
-        }
-      }
+    if (pixelSize <= 0) {
+        console.error('Calculated pixel size is too small.');
+        return await Jimp.read(qrBuffer); // Fallback
     }
-    
-    console.log('Pixel perfect QR created successfully');
+
+    // Define neon colors using Jimp's hex parser
+    const colors = [
+      Jimp.cssColorToHex('#00ff88'), // Neon green
+      Jimp.cssColorToHex('#00ccff'), // Cyan
+      Jimp.cssColorToHex('#ff0080')  // Pink
+    ];
+    const bgColor = Jimp.cssColorToHex('#141414');
+
+    // Iterate over QR and draw colored blocks using blit for efficiency
+    for (let y = 0; y < qrWidth; y++) {
+        for (let x = 0; x < qrWidth; x++) {
+            const pixelColor = qrImage.getPixelColor(x, y);
+            const { r } = Jimp.intToRGBA(pixelColor);
+
+            const startX = x * pixelSize;
+            const startY = y * pixelSize;
+            
+            const colorToUse = (r < 128) 
+                ? colors[(x + y) % colors.length] 
+                : bgColor;
+
+            // Create a colored block and blit it onto the canvas
+            const block = new Jimp(pixelSize, pixelSize, colorToUse);
+            canvas.blit(block, startX, startY);
+        }
+    }
+
+    console.log('Robust Pixel Perfect QR created successfully.');
     return canvas;
   } catch (error) {
-    console.error('Error in createPixelPerfectQR:', error);
-    // Fallback to original QR
-    return await Jimp.read(qrBuffer);
+    console.error('CRITICAL ERROR in createPixelPerfectQR:', error);
+    return await Jimp.read(qrBuffer); // Fallback to original QR on any error
   }
 }
 
@@ -261,10 +236,8 @@ app.post('/api/generate', upload.single('logo'), async (req, res) => {
     const qrStyle = formData.qrStyle || 'classic';
     
     console.log('Step 1: Generating QR content...');
-    // Generate QR content
     const qrContent = generateQRContent(formData);
     console.log('QR Content length:', qrContent.length);
-    console.log('QR Content preview:', qrContent.substring(0, 100) + (qrContent.length > 100 ? '...' : ''));
     
     if (!qrContent) {
       console.log('ERROR: No QR content generated');
@@ -272,7 +245,6 @@ app.post('/api/generate', upload.single('logo'), async (req, res) => {
     }
     
     console.log('Step 2: Setting QR options...');
-    // QR Code options
     const qrOptions = {
       width: 512,
       margin: 2,
@@ -282,25 +254,20 @@ app.post('/api/generate', upload.single('logo'), async (req, res) => {
       },
       errorCorrectionLevel: 'M'
     };
-    console.log('QR Options:', qrOptions);
     
     console.log('Step 3: Generating base QR buffer...');
-    // Generate base QR code as buffer
     const qrBuffer = await QRCode.toBuffer(qrContent, qrOptions);
     console.log('QR Buffer generated, size:', qrBuffer.length, 'bytes');
     
     console.log('Step 4: Processing style -', qrStyle);
     let finalImage;
     
-    // Apply style-specific processing
     switch (qrStyle) {
       case 'glassmorphism-dots':
-        console.log('Processing glassmorphism style...');
         finalImage = await createGlassmorphismQR(qrBuffer, 512);
         break;
         
       case 'pixel-perfect':
-        console.log('Processing pixel perfect style...');
         finalImage = await createPixelPerfectQR(qrBuffer, 512);
         break;
         
@@ -312,7 +279,6 @@ app.post('/api/generate', upload.single('logo'), async (req, res) => {
     
     console.log('Step 5: Final image created, dimensions:', finalImage.getWidth(), 'x', finalImage.getHeight());
     
-    // Add logo if present (only for classic style to maintain style integrity)
     if (logoFile && qrStyle === 'classic') {
       console.log('Step 6: Adding logo...');
       try {
@@ -330,32 +296,23 @@ app.post('/api/generate', upload.single('logo'), async (req, res) => {
         console.log('Logo added successfully');
       } catch (logoError) {
         console.error('Logo processing error:', logoError);
-        // Continue without logo if processing fails
       }
     }
     
     console.log('Step 7: Saving image...');
-    // Generate unique filename with style
     const timestamp = Date.now();
     const filename = `qr-${qrStyle}-${timestamp}.png`;
     const filepath = path.join(qrCodesDir, filename);
     
-    console.log('Saving to:', filepath);
-    
-    // Save image
     await finalImage.writeAsync(filepath);
-    console.log('Image saved successfully');
+    console.log('Image saved successfully to:', filepath);
     
     console.log('Step 8: Sending response...');
-    // Return success response
     const response = {
       qrCodeUrl: `/qr-codes/${filename}`,
       success: true,
       style: qrStyle
     };
-    console.log('Response:', response);
-    console.log('=== QR GENERATION SUCCESS ===');
-    
     res.json(response);
     
   } catch (error) {
@@ -363,10 +320,6 @@ app.post('/api/generate', upload.single('logo'), async (req, res) => {
     console.error('Timestamp:', new Date().toISOString());
     console.error('Error Message:', error.message);
     console.error('Error Stack:', error.stack);
-    console.error('Request Body:', req.body);
-    console.error('QR Style:', req.body.qrStyle);
-    console.error('=== END QR GENERATION ERROR ===');
-    
     res.status(500).json({ 
       error: 'Fehler beim Generieren des QR-Codes: ' + error.message 
     });
